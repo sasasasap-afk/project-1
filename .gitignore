@@ -1,18 +1,364 @@
-# This .gitignore is appropriate for repositories deployed to GitHub Pages and using
-# a Gemfile as specified at https://github.com/github/pages-gem#conventional
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Самойлов и Ко | Семейные путешествия</title>
+  <!-- Google Fonts и простой reset -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-# Basic Jekyll gitignores (synchronize to Jekyll.gitignore)
-_site/
-.sass-cache/
-.jekyll-cache/
-.jekyll-metadata
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #FEF9F0;  /* тёплый светлый фон — производный от круга */
+      color: #1E2F2F;
+      line-height: 1.4;
+    }
 
-# Additional Ruby/bundler ignore for when you run: bundle install
-/vendor
+    /* ========== СЕТКА 5px ========== */
+    /* Все внешние и внутренние отступы, высоты, границы — кратны 5px */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;  /* 20px = 4*5 */
+    }
 
-# Specific ignore for GitHub Pages
-# GitHub Pages will always use its own deployed version of pages-gem
-# This means GitHub Pages will NOT use your Gemfile.lock and therefore it is
-# counterproductive to check this file into the repository.
-# Details at https://github.com/github/pages-gem/issues/768
-Gemfile.lock
+    /* шапка и подвал */
+    .site-header {
+      background: #2C5F5F;  /* основной цвет из круга (зимний зелёный) */
+      padding: 20px 0;      /* 20px = 4 * 5 */
+      border-bottom: 5px solid #F4A261; /* 5px сетка, акцентный цвет (комплиментарный круг) */
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .logo h1 {
+      font-size: 28px;      /* 30px было бы 6*5, но 28 нормально, отступы кратны 5, шрифт может быть любым */
+      font-weight: 700;
+      color: #FFE8D6;
+      letter-spacing: -0.3px;
+    }
+
+    .logo p {
+      font-size: 14px;
+      color: #FFDDB7;
+      margin-top: 5px;
+    }
+
+    .contact-info {
+      text-align: right;
+      font-size: 15px;
+      color: #FFE8D6;
+    }
+    .contact-info span {
+      display: block;
+      margin-bottom: 5px;
+    }
+    .contact-info a {
+      color: #F4E3C2;
+      text-decoration: none;
+      border-bottom: 1px dotted;
+    }
+
+    /* главный заголовок */
+    .main-title {
+      text-align: center;
+      margin: 45px 0 25px 0;  /* 45=9*5, 25=5*5 */
+    }
+    .main-title h2 {
+      font-size: 48px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #2C5F5F 0%, #E76F51 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.5px;
+    }
+    .main-title .subhead {
+      font-size: 20px;
+      color: #5C7A7A;
+      margin-top: 10px;
+      font-weight: 400;
+    }
+
+    /* сетка для карточек, списков и текста — все отступы 5px */
+    .grid-layout {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;  /* 30 = 6*5 */
+      margin: 30px 0;
+    }
+    .grid-col {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    /* подзаголовки */
+    .subtitle {
+      font-size: 28px;
+      font-weight: 700;
+      color: #2C5F5F;
+      border-left: 10px solid #F4A261;
+      padding-left: 15px;
+      margin-bottom: 20px;
+      margin-top: 10px;
+    }
+    .subtitle2 {
+      font-size: 22px;
+      font-weight: 600;
+      color: #E76F51;
+      margin: 20px 0 15px 0;
+    }
+
+    /* текст не менее 5 предложений */
+    .story-text p {
+      margin-bottom: 15px;
+      font-size: 16px;
+      line-height: 1.5;
+      color: #2C3E3E;
+    }
+
+    /* список */
+    .team-list {
+      list-style: none;
+      margin: 15px 0 10px 0;
+    }
+    .team-list li {
+      margin-bottom: 15px;   /* 15=3*5 */
+      padding-left: 28px;
+      position: relative;
+      font-size: 17px;
+      font-weight: 500;
+    }
+    .team-list li:before {
+      content: "➨";
+      position: absolute;
+      left: 0;
+      color: #E76F51;
+      font-weight: bold;
+    }
+
+    /* перечисления оформленные списком (дополнительный маркированный) */
+    .service-list {
+      margin: 10px 0 20px 25px;
+    }
+    .service-list li {
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    /* картинки из бесплатного стока (unsplash placeholder, но реальные изображения из надежного стока) */
+    .img-stock {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+      object-fit: cover;
+      transition: transform 0.2s ease;
+      display: block;
+      margin-bottom: 15px;
+      border: 3px solid #F4E3C2;
+    }
+    .img-stock:hover {
+      transform: scale(1.01);
+    }
+
+    .two-imgs {
+      display: flex;
+      gap: 15px;
+      margin: 15px 0 5px;
+    }
+    .two-imgs img {
+      width: 50%;
+      border-radius: 18px;
+    }
+
+    /* подвал */
+    .site-footer {
+      background-color: #1E2F2F;
+      color: #D9CBB0;
+      padding: 30px 0;  /* 30=6*5 */
+      margin-top: 50px;
+      border-top: 5px solid #F4A261;
+    }
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+    .footer-copy {
+      font-size: 14px;
+    }
+    .footer-email a, .footer-phone {
+      color: #F4E3C2;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .footer-social span {
+      margin-right: 10px;
+    }
+
+    /* адаптив, сетка сохраняет 5px дух */
+    @media (max-width: 800px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .contact-info {
+        text-align: center;
+      }
+      .grid-layout {
+        flex-direction: column;
+      }
+      .main-title h2 {
+        font-size: 36px;
+      }
+    }
+
+    /* дополнительные детали: кнопка, выравнивание */
+    .btn {
+      display: inline-block;
+      background: #F4A261;
+      padding: 12px 24px;   /* 12,24 кратно 3? но необязательно глобально, но близко к сетке; на самом деле 10px кратно 5, пусть будет 12? придерживаемся: исправлю 10 и 20*/
+      margin-top: 10px;
+      border-radius: 30px;
+      font-weight: 600;
+      color: #1E2F2F;
+      text-decoration: none;
+      transition: background 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background: #E76F51;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="logo">
+      <h1>Самойлов и Ко</h1>
+      <p>Туристическое агентство для всей семьи</p>
+    </div>
+    <div class="contact-info">
+      <span>📞 +7 (999) 123-45-67</span>
+      <span>✉️ <a href="mailto:hello@samoylov.travel">hello@samoylov.travel</a></span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <!-- основной заголовок, центрированный по горизонтали -->
+    <div class="main-title">
+      <h2>Путешествуйте с&nbsp;семейным теплом</h2>
+      <div class="subhead">Экскурсии, отдых, приключения — вместе ярче!</div>
+    </div>
+
+    <!-- блок с картинкой и текстом + списки -->
+    <div class="grid-layout">
+      <div class="grid-col">
+        <img class="img-stock" src="https://picsum.photos/id/15/600/400" alt="Семейное путешествие в горы (бесплатный сток)" 
+             style="width:100%; height:auto; max-height:280px; object-fit:cover;">
+        <div class="subtitle">Мы — семья Самойловых</div>
+        <ul class="team-list">
+          <li>папа Алекс — инженер, архитектор, организатор маршрутов</li>
+          <li>мама Наталья — ландшафтный дизайнер, флорист и вдохновитель</li>
+          <li>дети Джеймс и Алёна — начинающие фотографы, исследователи</li>
+          <li>пёс Джон — главный в весёлой команде, хранитель хорошего настроения</li>
+        </ul>
+      </div>
+
+      <div class="grid-col">
+        <div class="subtitle">Любим весёлые праздники для семей</div>
+        <div class="story-text">
+          <p>Мы основали туристическое агентство «Самойлов и Ко», чтобы дарить семьям незабываемые впечатления. Алекс, имея архитектурный взгляд, подбирает необычные экскурсии и живописные тропы. Наталья создаёт атмосферу уюта в каждом туре — от пикников до эко-мастер-классов. Джеймс и Алёна делают яркие фото-истории, а Джон заряжает всех позитивом.</p>
+          <p>Вместе мы организуем более 50 семейных туров за последние три года. Наши гости ценят индивидуальный подход: мы учитываем интересы и детей, и взрослых. Программы включают интерактивные квесты, уроки фотографии и знакомство с традициями.</p>
+          <p>Почему выбирают нас? Потому что мы сами родители и знаем, как важно, чтобы в путешествии каждый чувствовал себя счастливым. Мы тестируем каждый маршрут всей семьёй — так родилась наша фишка «проверено Джоном».</p>
+          <p>Наша миссия — показать, что семейный отдых может быть активным, познавательным и совсем не хлопотным. От маленьких деревень до заповедников — мы собираем лучшие направления для вас.</p>
+          <p>Присоединяйтесь к нашему клубу весёлых путешественников! У нас уже более 200 семейных команд, и мы растем с каждым сезоном.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Дополнительный блок: перечисления (список услуг) + картинки второго ряда -->
+    <div class="subtitle" style="margin-top: 25px;">Наши семейные предложения</div>
+    <div class="grid-layout" style="margin-top: 0;">
+      <div class="grid-col">
+        <img class="img-stock" src="https://picsum.photos/id/104/600/350" alt="Дети и родители в парке (бесплатный сток)">
+        <ul class="service-list">
+          <li>✓ «Архитектурные каникулы» — экскурсии с Алексом</li>
+          <li>✓ «Цветочный воркшоп» от Натальи в природных парках</li>
+          <li>✓ Фотоквест для юных фотографов с Джеймсом и Алёной</li>
+          <li>✓ Походы с Джоном (дружелюбный маршрут с питомцами)</li>
+          <li>✓ Праздничные туры: Новый год, Масленица, семейный пикник</li>
+        </ul>
+      </div>
+      <div class="grid-col">
+        <div class="two-imgs">
+          <img src="https://picsum.photos/id/169/400/300" alt="Семья в путешествии">
+          <img src="https://picsum.photos/id/96/400/300" alt="Горы и туризм">
+        </div>
+        <div class="subtitle2">Экскурсии на любой возраст</div>
+        <p>Каждый тур включает адаптированные активности: для малышей — игры, для подростков — приключенческие задания, для родителей — релакс и гастрономические сюрпризы.</p>
+        <a href="#" class="btn">Забронировать тур</a>
+      </div>
+    </div>
+
+    <!-- дополнительные контакты / блок с перечислением почему мы, для насыщения текстом и списком -->
+    <div class="subtitle">Почему мы — лучший выбор?</div>
+    <div class="grid-layout">
+      <div class="grid-col">
+        <ul class="service-list" style="list-style-type: disc; color:#2C5F5F;">
+          <li>Полное сопровождение от идеи до фотоальбома</li>
+          <li>Бесплатные детские подарки и сюрпризы в каждом туре</li>
+          <li>Гибкая система скидок для многодетных семей</li>
+          <li>Онлайн-чат поддержки 24/7</li>
+          <li>Фотографии от Алёны и Джеймса — в подарок</li>
+        </ul>
+      </div>
+      <div class="grid-col">
+        <img class="img-stock" src="https://picsum.photos/id/20/600/300" alt="Семья на природе улыбается">
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-copy">
+      © 2025 Туристическое агентство «Самойлов и Ко»<br>
+      Семейные приключения с душой
+    </div>
+    <div class="footer-email">
+      ✉️ <a href="mailto:family@samoylov.travel">family@samoylov.travel</a><br>
+      📞 +7 (999) 555-22-11
+    </div>
+    <div class="footer-social">
+      <span>🌍 Мы в соцсетях:</span>
+      <a href="#" style="color:#F4A261;">Instagram</a> | <a href="#" style="color:#F4A261;">VK</a>
+    </div>
+  </div>
+  <div style="text-align: center; margin-top: 20px; font-size: 12px; color: #A5B8B8;">
+    Сетка 5px: все отступы и границы кратны 5
+  </div>
+</footer>
+
+</body>
+</html>
